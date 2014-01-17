@@ -1,9 +1,16 @@
+*~
 *.gem
 *.rbc
 .bundle
 .config
+.jbundler
+.rspec
+.ruby-version
+.ruby-gemset
 coverage
+Gemfile.lock
 InstalledFiles
+Jarfile.lock
 lib/bundler/man
 pkg
 rdoc
