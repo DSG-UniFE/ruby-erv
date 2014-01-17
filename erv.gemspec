@@ -23,7 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
 
   if RUBY_PLATFORM == 'java'
-    spec.add_runtime_dependency 'thor'
     spec.add_runtime_dependency 'jbundler'
+  else
+    spec.add_dependency 'gsl-nmatrix'
   end
 end
