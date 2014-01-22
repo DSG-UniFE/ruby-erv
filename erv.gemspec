@@ -24,6 +24,10 @@ Gem::Specification.new do |spec|
 
   if RUBY_PLATFORM == 'java'
     spec.add_runtime_dependency 'jbundler'
+    spec.requirements << %q{
+      snapshot_repository 'http://repository.apache.org/content/groups/snapshots'
+      jar 'org.apache.commons:commons-math3', '3.3-SNAPSHOT'
+    }
   else
     spec.add_dependency 'gsl-nmatrix'
   end
