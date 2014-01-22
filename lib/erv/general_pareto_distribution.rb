@@ -4,6 +4,7 @@ if RUBY_PLATFORM == 'java'
 end
 
 require 'erv/distribution'
+require 'erv/support/try'
 
 
 module ERV

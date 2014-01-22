@@ -6,6 +6,7 @@ require 'erv/gaussian_distribution'
 require 'erv/general_pareto_distribution'
 require 'erv/geometric_distribution'
 require 'erv/uniform_distribution'
+require 'erv/support/try'
 
 
 module ERV
