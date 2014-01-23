@@ -32,7 +32,7 @@ If using JRuby, you'll also need to run:
     rake get_latest_commons_math_snapshot
 
 to fetch the latest version of Apache Commons Math 3.3-SNAPSHOT. See the
-[implementation notes below](#Implementation-notes) for more information. (Note
+[implementation notes below](#implementation-notes) for more information. (Note
 that the rake-based installation of Apache Commons Math 3.3-SNAPSHOT requires
 [nokogiri](http://nokogiri.org/).)
 
@@ -51,7 +51,7 @@ s1 = gaussian_rv.sample
 ```
 
 
-## (#Implementation-notes)
+## Implementation notes
 
 In YARV/MRI, ruby-erv leverages the GNU Scientific Library (GSL) for random
 number generation according to the desired probability distribution.
