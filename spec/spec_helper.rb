@@ -3,12 +3,8 @@
 # Require this file using `require "spec_helper"` to ensure that it is only
 # loaded once.
 
-require 'rubygems'
-require 'bundler/setup'
-
-if RUBY_PLATFORM == 'java'
-  require 'jbundler'
-end
+# Required to setup classpath for Apache Commons Math 3.3-SNAPSHOT in JRuby
+require 'erv'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
