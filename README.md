@@ -20,7 +20,7 @@ I have not released ruby-erv on RubyGems, yet. For the moment, if you want to
 try it just place this line:
 
 ```ruby
-gem 'erv', git: 'https://github.com/mtortonesi/ruby-erv'
+gem 'erv', git: 'https://github.com/mtortonesi/ruby-erv.git'
 ```
 
 in your Gemfile and run:
