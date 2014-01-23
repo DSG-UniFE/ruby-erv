@@ -22,12 +22,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
 
-  if RUBY_PLATFORM == 'java'
-    spec.add_runtime_dependency 'jbundler'
-    spec.requirements << %q{
-      snapshot_repository 'http://repository.apache.org/content/groups/snapshots'
-      jar 'org.apache.commons:commons-math3', '3.3-SNAPSHOT'
-    }
+  if RUBY_PLATFORM =~ /java/
+    # include Apache Commons Math 3.3 jar archive
+    spec.files.concat(Dir['jars/*.jar'])
   else
     spec.add_dependency 'gsl-nmatrix'
   end

@@ -27,11 +27,14 @@ in your Gemfile and run:
 
     bundle install
 
-if using YARV/MRI or:
+If using JRuby, you'll also need to run:
 
-    jbundle install
+    rake get_latest_commons_math_snapshot
 
-if using JRuby.
+to fetch the latest version of Apache Commons Math 3.3-SNAPSHOT. See the
+[implementation notes below](#Implementation-notes) for more information. (Note
+that the rake-based installation of Apache Commons Math 3.3-SNAPSHOT requires
+[nokogiri](http://nokogiri.org/).)
 
 
 ## Examples
@@ -48,7 +51,7 @@ s1 = gaussian_rv.sample
 ```
 
 
-## Implementation notes
+## (#Implementation-notes)
 
 In YARV/MRI, ruby-erv leverages the GNU Scientific Library (GSL) for random
 number generation according to the desired probability distribution.
@@ -68,7 +71,26 @@ Commons Math maintainers have not shipped the 3.3 release yet. Commons Math 3.3
 should have support for geometric distribution (that I need for several of my
 projects), thanks to [a patch](https://issues.apache.org/jira/browse/MATH-973)
 that I submitted and that was merged some time ago. So, for the moment ruby-env
-builds on top of a pre-3.3 snapshot version of Apache Commons Math.
+builds on top of the 3.3-SNAPSHOT version of Apache Commons Math.
+
+To facilitate the installation of ruby-env under JRuby, I have decided to
+bundle the jar archive of Apache Commons Math 3.3-SNAPSHOT in (the jars
+directory of) the ruby-env gem package. This is a rather dirty but not uncommon
+approach, as many other gems (including the awesome
+[Nokogiri](https://github.com/sparklemotion/nokogiri/tree/master/lib)) bundle
+external jar dependencies in their JRuby version. However, in future I might
+decide to switch to a more powerful, Maven-based automated installation of
+Apache Commons Math 3.3-SNAPSHOT. For instance, based on Christian Meier's
+[jar-dependencies](https://github.com/mkristian/jar-dependencies).
+
+
+## Acknowledgment
+
+I would like to thank [Christian Meier](https://github.com/mkristian) for his
+very valuable suggestions on how to package this gem for JRuby. If you're
+interested in building serious applications for JRuby, I strongly recommend you
+to check out Christian's [jbundler](https://github.com/mkristian/jbundler) and
+[jar-dependencies](https://github.com/mkristian/jar-dependencies).
 
 
 ## License
