@@ -62,16 +62,13 @@ that I sent them ages ago and that was never merged.) So, ruby-erv uses the
 
 In JRuby, ruby-erv leverages the [Apache Commons
 Math](http://commons.apache.org/proper/commons-math/) library to access the
-same random number generation functions. ruby-erv relies on the awesome
-(although not very well documented, I have to say)
-[JBundler](https://github.com/mkristian/jbundler) to automate the installation
-of Apache Commons Math through a standard Maven-based jar retrieval and
-installation procedure. Unfortunately, at the time of this writing the Apache
-Commons Math maintainers have not shipped the 3.3 release yet. Commons Math 3.3
-should have support for geometric distribution (that I need for several of my
-projects), thanks to [a patch](https://issues.apache.org/jira/browse/MATH-973)
-that I submitted and that was merged some time ago. So, for the moment ruby-env
-builds on top of the 3.3-SNAPSHOT version of Apache Commons Math.
+same random number generation functions. Unfortunately, at the time of this
+writing the Apache Commons Math maintainers have not shipped the 3.3 release
+yet. Commons Math 3.3 should include support for geometric distribution (that I
+need for several of my projects), thanks to [a
+patch](https://issues.apache.org/jira/browse/MATH-973) that I submitted and
+that was merged some time ago. So, for the moment ruby-env builds on top of the
+3.3-SNAPSHOT version of Apache Commons Math.
 
 To facilitate the installation of ruby-env under JRuby, I have decided to
 bundle the jar archive of Apache Commons Math 3.3-SNAPSHOT in (the jars
