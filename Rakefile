@@ -42,7 +42,7 @@ if RUBY_PLATFORM =~ /java/
     FileUtils.rm(Dir.glob("#{JAR_DIR}/*").reject!{|file| file == jar_path })
   end
 
-  desc "Build erv-#{ERV::VERSION}.gem into the pkg directory."
+  desc "Build erv-#{ERV::VERSION}-java.gem into the pkg directory."
   task :build => [ :get_latest_commons_math_snapshot ] do
     Bundler::GemHelper.instance = Bundler::GemHelper.new
     Bundler::GemHelper.instance.build_gem

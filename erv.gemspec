@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mtortonesi/ruby-erv'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = `git ls-files`.split($/).reject{|x| x == '.gitignore' }
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
@@ -23,6 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
 
   if RUBY_PLATFORM =~ /java/
+    # we need to release a JRuby-specific gem
+    spec.platform = 'java'
     # include Apache Commons Math 3.3 jar archive
     spec.files.concat(Dir['jars/*.jar'])
   else
