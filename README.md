@@ -16,8 +16,17 @@ on Rubinius yet.
 
 ## Installation
 
-I have not released ruby-erv on RubyGems, yet. For the moment, if you want to
-try it just place this line:
+### Stable version
+
+You can get the stable version of ruby-erv by installing the erv gem from
+RubyGems:
+
+    gem install erv
+
+### Development version
+
+If you want to try the development version of ruby-erv, instead, just place
+this line:
 
 ```ruby
 gem 'erv', git: 'https://github.com/mtortonesi/ruby-erv.git'
@@ -27,7 +36,7 @@ in your Gemfile and run:
 
     bundle install
 
-If using JRuby, you'll also need to run:
+If you're using JRuby, you'll also need to run:
 
     rake get_latest_commons_math_snapshot
 
@@ -45,9 +54,15 @@ variables using ruby-erv, and how to sample from them:
 ```ruby
 require 'erv'
 
+# Gaussian random variable with mean 10 and standard deviation 2
 gaussian_rv = ERV::RandomVariable.new(distribution: :gaussian,
                                       mean: 10, sd: 2)
 s1 = gaussian_rv.sample
+
+# Geometric random variable with probability of success 0.3
+geometric_rv = ERV::RandomVariable.new(distribution: :geometric,
+                                       probability_of_success: 0.3)
+s2 = geometric_rv.sample
 ```
 
 
