@@ -30,9 +30,9 @@ module ERV
 
   class SequentialRandomVariable
     def initialize(args)
-      @first = args.delete(:first_value)
-      @most_recent = @first || 0.0
-      @var = RandomVariable.new(args)
+      first = args[:first_value]
+      @most_recent = first.nil? ? 0.0 : first.to_f
+      @var = RandomVariable.new(args.reject{|k,v| k == :first_value })
     end
 
     def next

@@ -53,3 +53,12 @@ else # RUBY_PLATFORM !~ /java/
   require 'bundler/gem_tasks'
 
 end
+
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.test_files = Dir.glob('test/**/*_test.rb').sort
+  t.verbose = true
+end
