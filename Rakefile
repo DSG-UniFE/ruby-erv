@@ -1,6 +1,6 @@
 if RUBY_PLATFORM =~ /java/
 
-  require 'lib/erv/version'
+  require 'erv/version'
   require 'bundler/gem_helper'
 
   require 'nokogiri'
