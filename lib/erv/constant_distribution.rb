@@ -7,8 +7,11 @@ module ERV
       super(opts)
 
       raise ArgumentError unless opts[:value]
-      val = opts[:value].to_f
-      @func = Proc.new { val }
+      @val = opts[:value].to_f
+    end
+
+    def sample
+      @val
     end
   end
 

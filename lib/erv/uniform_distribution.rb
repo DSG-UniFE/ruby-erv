@@ -1,8 +1,3 @@
-if RUBY_PLATFORM == 'java'
-  require 'java'
-  java_import org.apache.commons.math3.distribution.UniformRealDistribution
-end
-
 require 'erv/distribution'
 require 'erv/support/try'
 
@@ -15,18 +10,15 @@ module ERV
 
       raise ArgumentError unless opts[:max_value]
       max = opts[:max_value].to_f
-      min = opts[:min_value].try(:to_f) || 0.0
+      @min = opts[:min_value].try(:to_f) || 0.0
+      @range = max - @min
+    end
 
-      if RUBY_PLATFORM == 'java'
-        # create distribution
-        d = UniformRealDistribution.new(@rng, min, max,
-                UniformRealDistribution::DEFAULT_INVERSE_ABSOLUTE_ACCURACY)
-        # setup sampling function
-        @func = Proc.new { d.sample }
-      else
-        # setup sampling function
-        @func = Proc.new { @rng.flat(min, max) }
-      end
+    def sample
+      # starting from a random variable X ~ U(0,1), which is provided by the
+      # RNG, we can obtain a random variable Y ~ U(a,b) through location-scale
+      # transformation: Y = a + (b-a) X. see [GROESE11], section 3.1.2.2.
+      @min + @range * @rng.sample
     end
   end
 

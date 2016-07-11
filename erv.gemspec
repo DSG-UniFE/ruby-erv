@@ -22,14 +22,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'minitest-spec-context', '~> 0.0.3'
 
-  if RUBY_PLATFORM =~ /java/
-    # we need to release a JRuby-specific gem
-    spec.platform = 'java'
-    # include Apache Commons Math 3.3 jar archive
-    spec.files.concat(Dir['jars/*.jar'])
-    # include nokogiri as development dependency
-    spec.add_development_dependency 'nokogiri'
-  else
-    spec.add_dependency 'gsl-nmatrix'
-  end
+#   if RUBY_PLATFORM =~ /java/
+#     # we need to release a JRuby-specific gem
+#     spec.platform = 'java'
+#     # include Apache Commons Math 3.3 jar archive
+#     spec.files.concat(Dir['jars/*.jar'])
+#     # include nokogiri as development dependency
+#     spec.add_development_dependency 'nokogiri'
+#   else
+#     spec.add_dependency 'gsl-nmatrix'
+#   end
 end

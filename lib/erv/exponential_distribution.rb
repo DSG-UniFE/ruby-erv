@@ -1,8 +1,3 @@
-if RUBY_PLATFORM == 'java'
-  require 'java'
-  JExponentialDistribution = org.apache.commons.math3.distribution.ExponentialDistribution
-end
-
 require 'erv/distribution'
 
 
@@ -13,18 +8,15 @@ module ERV
       super(opts)
 
       raise ArgumentError unless opts[:mean]
-      mean = opts[:mean].to_f
+      @mean = opts[:mean].to_f
+    end
 
-      if RUBY_PLATFORM == 'java'
-        # create distribution
-        d = JExponentialDistribution.new(@rng, mean,
-                JExponentialDistribution::DEFAULT_INVERSE_ABSOLUTE_ACCURACY)
-        # setup sampling function
-        @func = Proc.new { d.sample }
-      else
-        # setup sampling function
-        @func = Proc.new { @rng.exponential(mean) }
-      end
+    def sample
+      # starting from a random variable X ~ U(0,1), which is provided by the
+      # RNG, we can obtain a random variable Y ~ Exp(\lambda), with mean = 1 /
+      # \lambda, through the transformation: Y = - (1 / \lambda) ln X. see
+      # [GROESE11], section 4.2.3.
+      - @mean * Math.ln(@rng.sample)
     end
   end
 

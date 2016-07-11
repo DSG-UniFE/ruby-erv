@@ -18,6 +18,7 @@ module ERV
 
       # get class name that corresponds to the requested distribution
       klass_name = dist_name.split('_').push('distribution').map(&:capitalize).join
+
       # create distribution object
       @dist = ERV.const_get(klass_name).new(opts)
     end
