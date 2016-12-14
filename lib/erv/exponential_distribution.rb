@@ -1,14 +1,20 @@
 require 'erv/distribution'
+require 'erv/support/try'
 
 
 module ERV
 
   class ExponentialDistribution < Distribution
+    attr_reader :mean, :variance
+
     def initialize(opts)
       super(opts)
 
-      raise ArgumentError unless opts[:mean]
-      @mean = opts[:mean].to_f
+      @rate = opts[:rate].try(:to_f)
+      raise ArgumentError unless @rate and @rate > 0.0
+
+      @mean = 1 / @rate
+      @variance = @mean ** 2
     end
 
     def sample

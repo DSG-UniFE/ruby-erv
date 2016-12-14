@@ -12,13 +12,13 @@ describe ERV::SequentialRandomVariable do
 
   it 'should consider starting value' do
     first = 1.0
-    srv = ERV::SequentialRandomVariable.new(first_value: first, distribution: :exponential, mean: 2.0)
+    srv = ERV::SequentialRandomVariable.new(first_value: first, distribution: :exponential, rate: 2.0)
     srv.next.must_be :>, first
   end
 
   it 'should consider previous sample' do
     first = 1.0
-    srv = ERV::SequentialRandomVariable.new(first_value: first, distribution: :exponential, mean: 2.0)
+    srv = ERV::SequentialRandomVariable.new(first_value: first, distribution: :exponential, rate: 2.0)
     previous_sample = srv.next
     10.times do
       new_sample = srv.next
