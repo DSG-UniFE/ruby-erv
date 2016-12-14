@@ -10,7 +10,7 @@
 coverage
 Gemfile.lock
 InstalledFiles
-Jarfile.lock
+/vendor/bundle
 lib/bundler/man
 pkg
 rdoc
