@@ -1,5 +1,7 @@
 require 'test_helper'
 
+require 'erv/random_variable'
+
 describe ERV::SequentialRandomVariable do
 
   it 'should require the :first_value parameter' do
