@@ -16,7 +16,7 @@ module ERV
       # RNG, we can obtain a random variable Y ~ Exp(\lambda), with mean = 1 /
       # \lambda, through the transformation: Y = - (1 / \lambda) ln X. see
       # [GROESE11], section 4.2.3.
-      - @mean * Math.ln(@rng.sample)
+      - @mean * Math.log(@rng.rand)
     end
   end
 

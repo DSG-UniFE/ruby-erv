@@ -1,16 +1,14 @@
-require 'erv/rng'
-
 module ERV
 
   class Distribution
     def initialize(opts)
-      # create RNG object
+      # use provided RNG or create a new one
       if opts[:rng]
         @rng = opts[:rng]
       elsif opts[:seed]
-        @rng = RNG.make_rng(opts[:seed])
+        @rng = Random.new(opts[:seed])
       else
-        raise ArgumentError, "No RNG or seed provided!"
+        @rng = Random.new
       end
     end
   end

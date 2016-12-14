@@ -18,7 +18,7 @@ module ERV
       # starting from a random variable X ~ U(0,1), which is provided by the
       # RNG, we can obtain a random variable Y ~ U(a,b) through location-scale
       # transformation: Y = a + (b-a) X. see [GROESE11], section 3.1.2.2.
-      @min + @range * @rng.sample
+      @min + @range * @rng.rand
     end
   end
 
