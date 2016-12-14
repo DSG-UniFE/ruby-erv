@@ -10,6 +10,14 @@ module ERV
       @val = opts[:value].to_f
     end
 
+    def mean
+      @val
+    end
+
+    def variance
+      0.0
+    end
+
     def sample
       @val
     end
