@@ -38,12 +38,25 @@ geometric_rv = ERV::RandomVariable.new(distribution: :geometric,
 s2 = geometric_rv.sample
 ```
 
+Starting from version 0.2.0, ruby-erv also supports mixture models. Here is a
+simple example of how to create a random variable with an exponential mixture
+distribution:
+
+```ruby
+require 'erv'
+
+emd = ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 100.0 },
+                                     { distribution: :exponential, rate: 2.0, weight: 200.0 },
+                                     { distribution: :exponential, rate: 3.0, weight: 300.0 } ])
+s3 = emd.sample
+```
+
 
 ## Implementation notes
 
 Starting from version 0.2.0, ruby-erv makes use of the standard (Pseudo) Random
 Number Generator provided by Ruby VMs, which is a variant of the
-Mersenne-Twister algorithm modified to have a period of 2<sup>19937-1</sup>.
+Mersenne-Twister algorithm modified to have a period of 2<sup>19937</sup>-1.
 The randomness provided by Ruby's PRNG, whose adoption significantly improved
 ruby-erv's portability to different Ruby VMs (MRI, JRuby, etc.), should be more
 than enough for most purposes.
