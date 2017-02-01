@@ -22,6 +22,9 @@ module ERV
         # ... and keep track of it
         @weight_sum += weight
 
+        # get amplitude
+        amplitude = dist_conf.fetch(:amplitude) { 1.0 }
+
         # get distribution name
         dist_name = dist_conf.delete(:distribution).to_s
 
@@ -50,7 +53,7 @@ module ERV
       end
 
       # return sample
-      @mixture[i][:distribution].sample
+      @mixture[i][:amplitude] * @mixture[i][:distribution].sample
     end
 
     def mean
@@ -64,16 +67,24 @@ module ERV
     private
 
       def calculate_mean
-        @mixture.inject(0.0) do |s,x| 
-          s += (x[:weight] / @weight_sum * x[:distribution].mean)
+        @mixture.inject(0.0) do |s,x|
+          s += (# the following formula was taken from
+                # https://en.wikipedia.org/wiki/Mixture_Distribution#Moments
+                x[:weight] / @weight_sum *
+                # remember: E[aX] = a E[X]
+                x[:amplitude] * x[:distribution].mean)
         end
       end
 
       def calculate_variance
-        @mixture.inject(0.0) do |s,x| 
-          s += (x[:weight] / @weight_sum * 
-                ((x[:distribution].mean - self.mean) ** 2 + 
-                 x[:distribution].variance))
+        @mixture.inject(0.0) do |s,x|
+          s += (# the following formula was taken from
+                # https://en.wikipedia.org/wiki/Mixture_Distribution#Moments
+                x[:weight] / @weight_sum *
+                # remember: E[aX] = a E[X]
+                ((x[:amplitude] * x[:distribution].mean - self.mean) ** 2 +
+                # remember: Var(aX) = a**2 Var(X)
+                 x[:amplitude] ** 2 * x[:distribution].variance))
         end
       end
   end
