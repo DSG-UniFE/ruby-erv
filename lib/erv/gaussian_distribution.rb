@@ -17,7 +17,7 @@ module ERV
       # 4.47) to obtain x ~ N(0,1).
       u_1 = @rng.rand
       u_2 = @rng.rand
-      x = Math.sqrt(-2.0 * Math.log(u_1)) * Math.cos(2.0 * Math.PI * u_2)
+      x = Math.sqrt(-2.0 * Math.log(u_1)) * Math.cos(2.0 * Math::PI * u_2)
 
       # use location-scale transformation to obtain a N(\mu, \sigma^2)
       # distribution. see [GROESE11], section 3.1.2.2.
