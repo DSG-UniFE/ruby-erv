@@ -14,13 +14,13 @@ module ERV
       raise ArgumentError, "Please, provide at least 2 distributions!" unless confs.length >= 2
 
       @mixture = []
-      @weight_sum = 0.0
+      weight_sum = 0.0
       while dist_conf = confs.shift
         # get weight ...
         weight = dist_conf.delete(:weight).to_f
 
         # ... and keep track of it
-        @weight_sum += weight
+        weight_sum += weight
 
         # get amplitude
         amplitude = dist_conf.fetch(:amplitude) { 1.0 }
@@ -35,7 +35,12 @@ module ERV
         distribution = ERV.const_get(klass_name).new(dist_conf)
 
         # add distribution to mixture
-        @mixture << { weight: weight, distribution: distribution }
+        @mixture << { amplitude: amplitude, weight: weight, distribution: distribution }
+      end
+
+      # normalize weights
+      @mixture.each do |dist|
+        dist[:weight] /= weight_sum
       end
 
       seed = opts[:seed]
@@ -47,8 +52,8 @@ module ERV
 
       # find index of distribution we are supposed to sample from
       i = 0
-      while x > (@mixture[i][:weight] / @weight_sum)
-        x -= (@mixture[i][:weight] / @weight_sum)
+      while x > @mixture[i][:weight]
+        x -= @mixture[i][:weight]
         i += 1
       end
 
@@ -70,7 +75,7 @@ module ERV
         @mixture.inject(0.0) do |s,x|
           s += (# the following formula was taken from
                 # https://en.wikipedia.org/wiki/Mixture_Distribution#Moments
-                x[:weight] / @weight_sum *
+                x[:weight] *
                 # remember: E[aX] = a E[X]
                 x[:amplitude] * x[:distribution].mean)
         end
@@ -80,7 +85,7 @@ module ERV
         @mixture.inject(0.0) do |s,x|
           s += (# the following formula was taken from
                 # https://en.wikipedia.org/wiki/Mixture_Distribution#Moments
-                x[:weight] / @weight_sum *
+                x[:weight] *
                 # remember: E[aX] = a E[X]
                 ((x[:amplitude] * x[:distribution].mean - self.mean) ** 2 +
                 # remember: Var(aX) = a**2 Var(X)

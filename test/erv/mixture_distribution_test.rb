@@ -9,14 +9,6 @@ describe ERV::MixtureDistribution do
     end.must_raise ArgumentError
   end
 
-  it 'should keep track of distribution weights (for normalization)' do
-    # create a mixture distribution with unnormalized weights
-    uw_md = ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 100.0 },
-                                           { distribution: :exponential, rate: 2.0, weight: 200.0 },
-                                           { distribution: :exponential, rate: 3.0, weight: 300.0 } ])
-    uw_md.instance_variable_get("@weight_sum").must_equal 600.0
-  end
-
   let :md do
     ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 0.3 },
                                    { distribution: :exponential, rate: 2.0, weight: 0.2 },
@@ -79,6 +71,33 @@ describe ERV::MixtureDistribution do
       it 'should correctly calculate the variance of the mixture' do
         amd.variance.must_equal amd_expected_variance
       end
+    end
+
+    context 'with unnormalized weights' do
+      let :uwmd do
+        ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 300 },
+                                       { distribution: :exponential, rate: 2.0, weight: 200 },
+                                       { distribution: :exponential, rate: 3.0, weight: 500 } ])
+      end
+
+      let :uwmd_expected_mean do
+        0.3 * 1/1.0 + 0.2 * 1/2.0 + 0.5 * 1/3.0
+      end
+
+      let :uwmd_expected_variance do
+        0.3 * ((1/1.0 - uwmd_expected_mean) ** 2 + (1/1.0) ** 2) +
+        0.2 * ((1/2.0 - uwmd_expected_mean) ** 2 + (1/2.0) ** 2) +
+        0.5 * ((1/3.0 - uwmd_expected_mean) ** 2 + (1/3.0) ** 2)
+      end
+
+      it 'should correctly calculate the mean of the mixture' do
+        uwmd.mean.must_equal uwmd_expected_mean
+      end
+
+      it 'should correctly calculate the variance of the mixture' do
+        uwmd.variance.must_equal uwmd_expected_variance
+      end
+
     end
 
   end
