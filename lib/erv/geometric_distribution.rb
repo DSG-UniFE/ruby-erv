@@ -1,32 +1,33 @@
-if RUBY_PLATFORM == 'java'
-  require 'java'
-  JGeometricDistribution = org.apache.commons.math3.distribution.GeometricDistribution
-end
+require 'erv/distribution'
 
 
 module ERV
 
+  # We adopt the following version of the geometric distribution:
+  #
+  #   Pr(X = k) = (1 - p) ^ {k-1} * p
+  #
+  # See: https://en.wikipedia.org/wiki/Geometric_distribution
   class GeometricDistribution < Distribution
+    attr_accessor :mean, :variance
+
     def initialize(opts)
       super(opts)
 
       raise ArgumentError unless opts[:probability_of_success]
-      p = opts[:probability_of_success].to_f
+      @p = opts[:probability_of_success].to_f
 
-      if RUBY_PLATFORM == 'java'
-        # create distribution
-        d = JGeometricDistribution.new(@rng, p)
-        # setup sampling function
-        @func = Proc.new { d.sample }
-      else
-        # setup sampling function
-        #
-        # WARNING: I HAVEN'T TRIED THIS CODE!!!
-        # Note that GSL implements the shifted version of the geometric
-        # distribution, so we might need to change the result (removing 1?)
-        @func = Proc.new { @rng.geometric(p) }
-      end
+      @mean = 1.0 / @p
+      @variance = (1.0 - @p) / (@p ** 2)
+
+      @ln_1_minus_p = Math::log(1 - @p)
     end
+
+    def sample
+      u = @rng.rand
+      (Math::log(u) / @ln_1_minus_p).ceil
+    end
+
   end
 
 end
