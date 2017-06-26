@@ -13,14 +13,14 @@ module ERV
     end
 
     def sample
-      # use box-muller algorithm (see [GROESE11], section 4.2.11, algorithm
+      # Use Box-Muller algorithm (see [KROESE11], section 4.2.11, algorithm
       # 4.47) to obtain x ~ N(0,1).
       u_1 = @rng.rand
       u_2 = @rng.rand
       x = Math.sqrt(-2.0 * Math.log(u_1)) * Math.cos(2.0 * Math::PI * u_2)
 
-      # use location-scale transformation to obtain a N(\mu, \sigma^2)
-      # distribution. see [GROESE11], section 3.1.2.2.
+      # Use location-scale transformation to obtain a N(\mu, \sigma^2)
+      # distribution. See [KROESE11], section 3.1.2.2.
       @mu + @sigma * x
     end
 
