@@ -32,7 +32,7 @@ module ERV
     def sample
       u = 1.0 - @rng.rand
       if @shape == 0.0
-        @location - @scale * Math::ln(u)
+        @location - @scale * Math::log(u)
       else
         @location + (@scale * ((u ** (- @shape)) - 1.0) / @shape)
       end
