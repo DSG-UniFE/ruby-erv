@@ -1,10 +1,10 @@
 require 'test_helper'
 
-require 'erv/general_pareto_distribution'
+require 'erv/generalized_pareto_distribution'
 
 describe ERV::GpdDistribution do
 
-  NUM_SAMPLES = 50000
+  let :num_samples { 200000 }
 
   it 'should require scale and shape parameters' do
     lambda do
@@ -29,16 +29,16 @@ describe ERV::GpdDistribution do
 
     context 'moments' do
       let :samples do
-        0.upto(NUM_SAMPLES).collect { gpd_2params.sample }
+        0.upto(num_samples).collect { gpd_2params.sample }
       end
 
       it 'should have the expected mean' do
-        sample_mean = samples.inject(0.0) {|s,x| s += x } / NUM_SAMPLES.to_f
+        sample_mean = samples.inject(0.0) {|s,x| s += x } / num_samples.to_f
         sample_mean.must_be_within_epsilon gpd_2params.mean, 0.1
       end
 
       it 'should have the expected variance' do
-        sample_variance = samples.inject(0.0) {|s,x| s += (x - gpd_2params.mean) ** 2 } / NUM_SAMPLES.to_f
+        sample_variance = samples.inject(0.0) {|s,x| s += (x - gpd_2params.mean) ** 2 } / num_samples.to_f
         sample_variance.must_be_within_epsilon gpd_2params.variance, 0.1
       end
 
@@ -64,16 +64,16 @@ describe ERV::GpdDistribution do
 
     context 'moments' do
       let :samples do
-        0.upto(NUM_SAMPLES).collect { gpd_3params.sample }
+        0.upto(num_samples).collect { gpd_3params.sample }
       end
 
       it 'should have the expected mean' do
-        sample_mean = samples.inject(0.0) {|s,x| s += x } / NUM_SAMPLES.to_f
+        sample_mean = samples.inject(0.0) {|s,x| s += x } / num_samples.to_f
         sample_mean.must_be_within_epsilon gpd_3params.mean, 0.1
       end
 
       it 'should have the expected variance' do
-        sample_variance = samples.inject(0.0) {|s,x| s += (x - gpd_3params.mean) ** 2 } / NUM_SAMPLES.to_f
+        sample_variance = samples.inject(0.0) {|s,x| s += (x - gpd_3params.mean) ** 2 } / num_samples.to_f
         sample_variance.must_be_within_epsilon gpd_3params.variance, 0.1
       end
 

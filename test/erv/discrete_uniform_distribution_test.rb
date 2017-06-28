@@ -4,7 +4,7 @@ require 'erv/discrete_uniform_distribution'
 
 describe ERV::DiscreteUniformDistribution do
 
-  NUM_SAMPLES = 10000
+  let :num_samples { 10000 }
 
   it 'should require at least a maximum parameter' do
     lambda do
@@ -29,16 +29,16 @@ describe ERV::DiscreteUniformDistribution do
 
     context 'moments' do
       let :samples do
-        0.upto(NUM_SAMPLES).collect { zero_to_sixty.sample }
+        0.upto(num_samples).collect { zero_to_sixty.sample }
       end
 
       it 'should have the expected mean' do
-        sample_mean = samples.inject(0.0) {|s,x| s += x } / NUM_SAMPLES.to_f
+        sample_mean = samples.inject(0.0) {|s,x| s += x } / num_samples.to_f
         sample_mean.must_be_within_epsilon zero_to_sixty.mean, 0.05
       end
 
       it 'should have the expected variance' do
-        sample_variance = samples.inject(0.0) {|s,x| s += (x - zero_to_sixty.mean) ** 2 } / NUM_SAMPLES.to_f
+        sample_variance = samples.inject(0.0) {|s,x| s += (x - zero_to_sixty.mean) ** 2 } / num_samples.to_f
         sample_variance.must_be_within_epsilon zero_to_sixty.variance, 0.05
       end
 
@@ -62,16 +62,16 @@ describe ERV::DiscreteUniformDistribution do
     context 'moments' do
 
       let :samples do
-        0.upto(NUM_SAMPLES).collect { ten_to_ninety.sample }
+        0.upto(num_samples).collect { ten_to_ninety.sample }
       end
 
       it 'should have the expected mean' do
-        sample_mean = samples.inject(0.0) {|s,x| s += x } / NUM_SAMPLES.to_f
+        sample_mean = samples.inject(0.0) {|s,x| s += x } / num_samples.to_f
         sample_mean.must_be_within_epsilon ten_to_ninety.mean, 0.05
       end
 
       it 'should have the expected variance' do
-        sample_variance = samples.inject(0.0) {|s,x| s += (x - ten_to_ninety.mean) ** 2 } / NUM_SAMPLES.to_f
+        sample_variance = samples.inject(0.0) {|s,x| s += (x - ten_to_ninety.mean) ** 2 } / num_samples.to_f
         sample_variance.must_be_within_epsilon ten_to_ninety.variance, 0.05
       end
 
