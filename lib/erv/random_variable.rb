@@ -13,6 +13,11 @@ require 'erv/support/try'
 module ERV
 
   class RandomVariable
+
+    extend Forwardable
+
+    def_delegators :@dist, :mean, :variance
+
     def initialize(opts)
       # get distribution name
       dist_name = opts[:distribution].try(:to_s)
