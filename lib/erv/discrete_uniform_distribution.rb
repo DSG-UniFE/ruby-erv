@@ -7,7 +7,7 @@ module ERV
   class DiscreteUniformDistribution < Distribution
     attr_reader :mean, :variance
 
-    def initialize(opts)
+    def initialize(opts={})
       super(opts)
 
       raise ArgumentError unless opts[:max_value]

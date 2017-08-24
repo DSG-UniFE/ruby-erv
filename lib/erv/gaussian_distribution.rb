@@ -4,7 +4,7 @@ require 'erv/distribution'
 module ERV
 
   class GaussianDistribution < Distribution
-    def initialize(opts)
+    def initialize(opts={})
       super(opts)
 
       raise ArgumentError unless opts[:mean] and opts[:sd]

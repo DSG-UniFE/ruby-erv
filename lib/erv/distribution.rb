@@ -1,7 +1,7 @@
 module ERV
 
   class Distribution
-    def initialize(opts)
+    def initialize(opts={})
       # use provided RNG or create a new one
       if opts[:rng]
         @rng = opts[:rng]

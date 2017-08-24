@@ -3,7 +3,7 @@ require 'erv/distribution'
 module ERV
 
   class ConstantDistribution < Distribution
-    def initialize(opts)
+    def initialize(opts={})
       super(opts)
 
       raise ArgumentError unless opts[:value]

@@ -8,7 +8,7 @@ module ERV
   class GpdDistribution < Distribution
     attr_accessor :mean, :variance
 
-    def initialize(opts)
+    def initialize(opts={})
       super(opts)
 
       raise ArgumentError unless opts[:scale] and opts[:shape]

@@ -7,7 +7,7 @@ module ERV
   class ExponentialDistribution < Distribution
     attr_reader :mean, :variance
 
-    def initialize(opts)
+    def initialize(opts={})
       super(opts)
 
       @rate = opts[:rate].try(:to_f)

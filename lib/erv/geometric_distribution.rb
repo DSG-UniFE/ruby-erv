@@ -11,7 +11,7 @@ module ERV
   class GeometricDistribution < Distribution
     attr_accessor :mean, :variance
 
-    def initialize(opts)
+    def initialize(opts={})
       super(opts)
 
       raise ArgumentError unless opts[:probability_of_success]

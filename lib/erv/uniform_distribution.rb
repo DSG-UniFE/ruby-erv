@@ -5,7 +5,7 @@ require 'erv/support/try'
 module ERV
 
   class UniformDistribution < Distribution
-    def initialize(opts)
+    def initialize(opts={})
       super(opts)
 
       raise ArgumentError unless opts[:max_value]
