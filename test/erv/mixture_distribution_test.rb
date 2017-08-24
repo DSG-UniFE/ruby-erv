@@ -8,16 +8,16 @@ describe ERV::MixtureDistribution do
 
   it 'should require at least two distributions' do
     lambda do
-      ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 0.5 } ])
+      ERV::MixtureDistribution.new([ { distribution: :exponential, args: { rate: 1.0 }, weight: 0.5 } ])
     end.must_raise ArgumentError
   end
 
   context 'sampling' do
 
     let :md do
-      ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 0.3 },
-                                     { distribution: :exponential, rate: 2.0, weight: 0.2 },
-                                     { distribution: :exponential, rate: 3.0, weight: 0.5 } ])
+      ERV::MixtureDistribution.new([ { distribution: :exponential, args: { rate: 1.0 }, weight: 0.3 },
+                                     { distribution: :exponential, args: { rate: 2.0 }, weight: 0.2 },
+                                     { distribution: :exponential, args: { rate: 3.0 }, weight: 0.5 } ])
     end
 
     it 'should allow sampling from the mixture' do
@@ -31,9 +31,9 @@ describe ERV::MixtureDistribution do
     context 'with normalized weights' do
 
       let :amd do
-        ERV::MixtureDistribution.new([ { distribution: :gaussian, mean: 1.0, sd: 0.1, weight: 0.3 },
-                                       { distribution: :gaussian, mean: 2.0, sd: 0.2, weight: 0.2 },
-                                       { distribution: :gaussian, mean: 3.0, sd: 0.3, weight: 0.5 } ])
+        ERV::MixtureDistribution.new([ { distribution: :gaussian, args: { mean: 1.0, sd: 0.1 }, weight: 0.3 },
+                                       { distribution: :gaussian, args: { mean: 2.0, sd: 0.2 }, weight: 0.2 },
+                                       { distribution: :gaussian, args: { mean: 3.0, sd: 0.3 }, weight: 0.5 } ])
       end
 
       let :amd_expected_mean do
@@ -75,9 +75,9 @@ describe ERV::MixtureDistribution do
     context 'with unnormalized weights' do
 
       let :uwmd do
-        ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 300 },
-                                       { distribution: :exponential, rate: 2.0, weight: 200 },
-                                       { distribution: :exponential, rate: 3.0, weight: 500 } ])
+        ERV::MixtureDistribution.new([ { distribution: :exponential, args: { rate: 1.0 }, weight: 300 },
+                                       { distribution: :exponential, args: { rate: 2.0 }, weight: 200 },
+                                       { distribution: :exponential, args: { rate: 3.0 }, weight: 500 } ])
       end
 
       let :uwmd_expected_mean do
@@ -112,6 +112,27 @@ describe ERV::MixtureDistribution do
         sample_variance.must_be_within_epsilon uwmd.variance, 0.05
       end
 
+    end
+
+  end
+
+  context 'mixture of mixtures' do
+    let :momd do
+      ERV::MixtureDistribution.new([ { distribution: :mixture,
+                                       args: [ { distribution: :exponential, args: { rate: 4.0 }, weight: 300 },
+                                               { distribution: :exponential, args: { rate: 5.0 }, weight: 200 },
+                                               { distribution: :exponential, args: { rate: 6.0 }, weight: 500 } ],
+                                       weight: 200 },
+                                     { distribution: :mixture,
+                                       args: [ { distribution: :exponential, args: { rate: 7.0 }, weight: 300 },
+                                               { distribution: :exponential, args: { rate: 8.0 }, weight: 200 },
+                                               { distribution: :exponential, args: { rate: 9.0 }, weight: 500 } ],
+                                       weight: 300 },
+                                   ], inspect: true)
+    end
+
+    it 'should allow sampling from the mixture' do
+      momd.sample
     end
 
   end

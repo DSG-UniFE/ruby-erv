@@ -11,7 +11,7 @@ module ERV
 
   class MixtureDistribution
     def initialize(confs, opts={})
-      raise ArgumentError, "Please, provide at least 2 distributions!" unless confs.length >= 2
+      raise ArgumentError, "Please, provide at least 2 distributions!" if confs.count < 2
 
       @mixture = []
       weight_sum = 0.0
@@ -29,7 +29,7 @@ module ERV
         klass_name = dist_name.split('_').push('distribution').map(&:capitalize).join
 
         # create distribution object
-        distribution = ERV.const_get(klass_name).new(dist_conf)
+        distribution = ERV.const_get(klass_name).new(dist_conf[:args])
 
         # add distribution to mixture
         @mixture << { weight: weight, distribution: distribution }
