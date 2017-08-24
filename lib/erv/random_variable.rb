@@ -37,9 +37,10 @@ module ERV
 
   class SequentialRandomVariable
     def initialize(args={})
-      first = args[:first_value]
-      @most_recent = first.nil? ? 0.0 : first
-      @var = RandomVariable.new(args.reject{|k,v| k == :first_value })
+      first = args.delete(:first_value)
+      raise ArgumentError, "First value must be provided!" if first.nil?
+      @most_recent = first.to_f
+      @var = RandomVariable.new(args)
     end
 
     def next
