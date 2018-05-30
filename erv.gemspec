@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/mtortonesi/ruby-erv'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files`.split($/).reject{|x| x == '.gitignore' }
+  spec.files         = `git ls-files`.split($/).reject{|x| x == '.gitignore' or x == '.projections.json' }
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
