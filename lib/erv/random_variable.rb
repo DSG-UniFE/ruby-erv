@@ -26,7 +26,7 @@ module ERV
       klass_name = dist_name.split('_').push('distribution').map(&:capitalize).join
 
       # create distribution object
-      @dist = ERV.const_get(klass_name).new(args)
+      @dist = ERV.const_get(klass_name).new(args[:args])
     end
 
     def next
