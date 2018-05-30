@@ -29,12 +29,12 @@ require 'erv'
 
 # Gaussian random variable with mean 10 and standard deviation 2
 gaussian_rv = ERV::RandomVariable.new(distribution: :gaussian,
-                                      mean: 10, sd: 2)
+                                      args: { mean: 10, sd: 2 })
 s1 = gaussian_rv.sample
 
 # Geometric random variable with probability of success 0.3
 geometric_rv = ERV::RandomVariable.new(distribution: :geometric,
-                                       probability_of_success: 0.3)
+                                       args: { probability_of_success: 0.3 })
 s2 = geometric_rv.sample
 ```
 
@@ -45,9 +45,9 @@ distribution:
 ```ruby
 require 'erv'
 
-emd = ERV::MixtureDistribution.new([ { distribution: :exponential, rate: 1.0, weight: 100.0 },
-                                     { distribution: :exponential, rate: 2.0, weight: 200.0 },
-                                     { distribution: :exponential, rate: 3.0, weight: 300.0 } ])
+emd = ERV::MixtureDistribution.new([ { distribution: :exponential, args: { rate: 1.0 }, weight: 100.0 },
+                                     { distribution: :exponential, args: { rate: 2.0 }, weight: 200.0 },
+                                     { distribution: :exponential, args: { rate: 3.0 }, weight: 300.0 } ])
 s3 = emd.sample
 ```
 
