@@ -32,10 +32,14 @@ module ERV
     def next
       @dist.sample
     end
+
+    alias_method :sample, :next
+
   end
 
 
   class SequentialRandomVariable
+
     def initialize(args={})
       first = args.delete(:first_value)
       raise ArgumentError, "First value must be provided!" if first.nil?
@@ -46,6 +50,9 @@ module ERV
     def next
       @most_recent += @var.next
     end
+
+    alias_method :sample, :next
+
   end
 
 end
