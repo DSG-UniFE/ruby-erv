@@ -4,7 +4,7 @@ require 'erv/gaussian_distribution'
 
 describe ERV::GaussianDistribution do
 
-  let :num_samples { 10000 }
+  let (:num_samples) { 10000 }
 
   it 'should require the scale and shape parameters' do
     lambda do

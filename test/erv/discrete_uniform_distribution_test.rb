@@ -4,7 +4,7 @@ require 'erv/discrete_uniform_distribution'
 
 describe ERV::DiscreteUniformDistribution do
 
-  let :num_samples { 10000 }
+  let (:num_samples) { 10000 }
 
   it 'should require at least a maximum parameter' do
     lambda do

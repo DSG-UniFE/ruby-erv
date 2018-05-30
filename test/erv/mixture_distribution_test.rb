@@ -4,7 +4,7 @@ require 'erv/mixture_distribution'
 
 describe ERV::MixtureDistribution do
 
-  let :num_samples { 10000 }
+  let (:num_samples) { 10000 }
 
   it 'should require at least two distributions' do
     lambda do

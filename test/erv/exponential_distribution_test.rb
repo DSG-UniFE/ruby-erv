@@ -4,7 +4,7 @@ require 'erv/exponential_distribution'
 
 describe ERV::ExponentialDistribution do
 
-  let :num_samples { 10000 }
+  let (:num_samples) { 10000 }
 
   it 'should require the rate parameter' do
     lambda do

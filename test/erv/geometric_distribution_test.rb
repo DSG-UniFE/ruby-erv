@@ -4,7 +4,7 @@ require 'erv/geometric_distribution'
 
 describe ERV::GeometricDistribution do
 
-  let :num_samples { 10000 }
+  let (:num_samples) { 10000 }
 
   it 'should require at least a probability of success parameter' do
     lambda do

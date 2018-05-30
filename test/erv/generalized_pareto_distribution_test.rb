@@ -4,7 +4,7 @@ require 'erv/generalized_pareto_distribution'
 
 describe ERV::GpdDistribution do
 
-  let :num_samples { 200000 }
+  let (:num_samples) { 200000 }
 
   it 'should require scale and shape parameters' do
     lambda do
