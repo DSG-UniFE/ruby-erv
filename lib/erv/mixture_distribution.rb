@@ -15,7 +15,8 @@ module ERV
 
       @mixture = []
       weight_sum = 0.0
-      while dist_conf = confs.shift
+      confs.each do |x|
+        dist_conf = x.dup
         # get weight ...
         weight = dist_conf.delete(:weight).to_f
 

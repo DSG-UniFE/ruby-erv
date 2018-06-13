@@ -40,7 +40,8 @@ module ERV
 
   class SequentialRandomVariable
 
-    def initialize(args={})
+    def initialize(opts={})
+      args = opts.dup
       first = args.delete(:first_value)
       raise ArgumentError, "First value must be provided!" if first.nil?
       @most_recent = first.to_f
