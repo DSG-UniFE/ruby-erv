@@ -1,5 +1,9 @@
 # ruby-erv
 
+[![Gem Version](https://badge.fury.io/rb/erv.svg)](https://badge.fury.io/rb/erv)
+[![Build Status](https://travis-ci.org/mtortonesi/ruby-erv.png?branch=master)](https://travis-ci.org/mtortonesi/ruby-erv)
+[![Code Climate](https://codeclimate.com/github/mtortonesi/ruby-erv.png)](https://codeclimate.com/github/mtortonesi/ruby-erv)
+
 Easy/elegant random variable library
 
 
