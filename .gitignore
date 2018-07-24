@@ -3,6 +3,7 @@
 *.rbc
 .bundle
 .config
+.env
 .jbundler
 .rspec
 .ruby-version
