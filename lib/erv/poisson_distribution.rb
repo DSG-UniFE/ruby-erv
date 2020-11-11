@@ -42,4 +42,4 @@ module ERV
       (k - 1).to_f
     end
   end
-  end
+end
