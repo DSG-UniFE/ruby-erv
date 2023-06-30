@@ -10,6 +10,9 @@ require 'erv/uniform_distribution'
 module ERV
 
   class MixtureDistribution
+
+    DEFAULT_SEED = 12345
+    
     def initialize(confs, opts={})
       raise ArgumentError, "Please, provide at least 2 distributions!" if confs.count < 2
 
@@ -42,6 +45,7 @@ module ERV
       end
 
       seed = opts[:seed]
+      seed = DEFAULT_SEED if seed.nil?
       @mixture_sampler = (seed ? Random.new(seed) : Random.new)
     end
 
