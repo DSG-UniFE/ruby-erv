@@ -7,6 +7,7 @@ require 'erv/generalized_pareto_distribution'
 require 'erv/geometric_distribution'
 require 'erv/mixture_distribution'
 require 'erv/uniform_distribution'
+require 'erv/weibull_distribution'
 require 'erv/support/try'
 
 
