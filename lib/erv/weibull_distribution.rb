@@ -20,7 +20,7 @@ module ERV
     # For more details, see [KROESE11], section 4.2.18, algorithm 4.66 and 
     def sample
       u = @rng.rand
-      x = (1.0/@scale) * (-Math::log(u)) ** (1.0 / @shape)
+      x = @scale * (-Math::log(1 - u)) ** (1.0 / @shape)
     end
 
   end
