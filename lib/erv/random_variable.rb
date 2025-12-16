@@ -1,3 +1,4 @@
+require 'forwardable'
 require 'erv/constant_distribution'
 require 'erv/discrete_uniform_distribution'
 require 'erv/exponential_distribution'
@@ -8,18 +9,18 @@ require 'erv/geometric_distribution'
 require 'erv/mixture_distribution'
 require 'erv/uniform_distribution'
 require 'erv/weibull_distribution'
+require 'erv/lognorm_distribution'
+require 'erv/beta_distribution'
+require 'erv/expnorm_distribution'
 require 'erv/support/try'
 
-
 module ERV
-
   class RandomVariable
-
     extend Forwardable
 
     def_delegators :@dist, :mean, :variance
 
-    def initialize(args={})
+    def initialize(args = {})
       # get distribution name
       dist_name = args[:distribution].try(:to_s)
 
@@ -34,17 +35,15 @@ module ERV
       @dist.sample
     end
 
-    alias_method :sample, :next
-
+    alias sample next
   end
 
-
   class SequentialRandomVariable
-
-    def initialize(opts={})
+    def initialize(opts = {})
       args = opts.dup
       first = args.delete(:first_value)
-      raise ArgumentError, "First value must be provided!" if first.nil?
+      raise ArgumentError, 'First value must be provided!' if first.nil?
+
       @most_recent = first.to_f
       @var = RandomVariable.new(args)
     end
@@ -53,8 +52,6 @@ module ERV
       @most_recent += @var.next
     end
 
-    alias_method :sample, :next
-
+    alias sample next
   end
-
 end
