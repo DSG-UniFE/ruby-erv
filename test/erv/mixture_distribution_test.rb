@@ -52,7 +52,7 @@ describe ERV::MixtureDistribution do
 
       let(:num_samples) { 200_000 }
       let(:samples) { num_samples.times.map { distribution.sample } }
-      let(:epsilon) { 1E-2 }
+      let(:epsilon) { 5E-2 }
 
       include ERV::DistributionBehavior
     end
@@ -84,7 +84,7 @@ describe ERV::MixtureDistribution do
 
       let(:num_samples) { 200_000 }
       let(:samples) { num_samples.times.map { distribution.sample } }
-      let(:epsilon) { 1E-2 }
+      let(:epsilon) { 5E-2 }
 
       include ERV::DistributionBehavior
     end

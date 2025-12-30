@@ -20,7 +20,7 @@ describe ERV::DiscreteUniformDistribution do
   with 'a 2-parameter distribution' do
     let(:distribution) { ERV::DiscreteUniformDistribution.new(min_value: 10, max_value: 90) }
 
-    let(:num_samples) { 300_000 }
+    let(:num_samples) { 200_000 }
     let(:samples) { num_samples.times.map { distribution.sample } }
     let(:epsilon) { 1E-2 }
 

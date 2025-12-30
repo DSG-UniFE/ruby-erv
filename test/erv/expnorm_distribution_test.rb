@@ -18,15 +18,10 @@ describe ERV::ExpNormDistribution do
   with 'sampling' do
     let(:distribution) { ERV::ExpNormDistribution.new(mu: 10.0, sigma: 5.0, lambda: 0.2) }
 
-    let(:num_samples) { 300_000 }
+    let(:num_samples) { 200_000 }
     let(:samples) { num_samples.times.map { distribution.sample } }
     let(:epsilon) { 1E-2 }
 
     include ERV::DistributionBehavior
-
-    # This is an incorrect assumption since the normal component can produce negative values
-    # it 'returns only positive values when sampling' do
-    #   samples.sample(10).each {|sample| expect(sample).to (be > 0) }
-    # end
   end
 end

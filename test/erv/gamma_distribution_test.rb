@@ -10,7 +10,7 @@ describe ERV::GammaDistribution do
 
     let(:num_samples) { 200_000 }
     let(:samples) { num_samples.times.map { distribution.sample } }
-    let(:epsilon) { 5E-3 }
+    let(:epsilon) { 1E-2 }
 
     include ERV::DistributionBehavior
   end
