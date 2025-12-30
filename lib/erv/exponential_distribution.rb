@@ -1,5 +1,4 @@
 require 'erv/distribution'
-require 'erv/support/try'
 
 
 module ERV
@@ -10,7 +9,7 @@ module ERV
     def initialize(opts={})
       super(opts)
 
-      @rate = opts[:rate].try(:to_f)
+      @rate = opts[:rate]&.to_f
       raise ArgumentError unless @rate and @rate > 0.0
 
       @mean = 1 / @rate

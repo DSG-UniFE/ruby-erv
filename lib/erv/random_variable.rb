@@ -12,7 +12,7 @@ require 'erv/weibull_distribution'
 require 'erv/lognorm_distribution'
 require 'erv/beta_distribution'
 require 'erv/expnorm_distribution'
-require 'erv/support/try'
+
 
 module ERV
   class RandomVariable
@@ -22,7 +22,7 @@ module ERV
 
     def initialize(args = {})
       # get distribution name
-      dist_name = args[:distribution].try(:to_s)
+      dist_name = args[:distribution]&.to_s
 
       # get class name that corresponds to the requested distribution
       klass_name = dist_name.split('_').push('distribution').map(&:capitalize).join

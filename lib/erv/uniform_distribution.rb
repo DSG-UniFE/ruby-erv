@@ -1,5 +1,4 @@
 require 'erv/distribution'
-require 'erv/support/try'
 
 
 module ERV
@@ -8,9 +7,9 @@ module ERV
     def initialize(opts={})
       super(opts)
 
-      raise ArgumentError unless opts[:max_value]
-      max = opts[:max_value].to_f
-      @min = opts[:min_value].try(:to_f) || 0.0
+      max = opts[:max_value]&.to_f
+      raise ArgumentError unless max
+      @min = opts.fetch(:min_value, 0.0).to_f
       @range = max - @min
     end
 

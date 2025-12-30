@@ -1,5 +1,4 @@
 require 'erv/distribution'
-require 'erv/support/try'
 
 
 module ERV
@@ -10,9 +9,9 @@ module ERV
     def initialize(opts={})
       super(opts)
 
-      raise ArgumentError unless opts[:max_value]
-      @max = opts[:max_value].to_i
-      @min = opts[:min_value].try(:to_i) || 0
+      @max = opts[:max_value]&.to_i
+      raise ArgumentError unless @max
+      @min = opts.fetch(:min_value, 0).to_i
       @mean = (@max + @min) / 2.0
       # See https://en.wikipedia.org/wiki/Discrete_uniform_distribution
       @variance = ((@max - @min + 1).to_f ** 2 - 1.0) / 12.0
