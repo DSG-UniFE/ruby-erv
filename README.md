@@ -1,8 +1,6 @@
 # ruby-erv
 
 [![Gem Version](https://badge.fury.io/rb/erv.svg)](https://badge.fury.io/rb/erv)
-[![Build Status](https://travis-ci.org/mtortonesi/ruby-erv.png?branch=master)](https://travis-ci.org/mtortonesi/ruby-erv)
-[![Code Climate](https://codeclimate.com/github/mtortonesi/ruby-erv.png)](https://codeclimate.com/github/mtortonesi/ruby-erv)
 
 Easy/elegant random variable library
 
@@ -11,8 +9,10 @@ Easy/elegant random variable library
 
 ruby-erv is a library that enables to create objects representing random
 variables with a given probability distribution (gaussian, uniform, etc.) and
-to sample from them. ruby-erv was built from code that I extracted out of
-several scientific software I wrote for my research projects.
+to sample from them. It originated as a bunch of RNG-related code extracted out
+of several scientific software tools that we wrote for our research projects at
+the University of Ferrara, Italy, that we later reshaped in a more coherent and
+systematic fashion.
 
 
 ## Installation
