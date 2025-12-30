@@ -11,7 +11,7 @@ module ERV
         distribution_mean = distribution.mean
         expect(sample_mean).to be_within(epsilon * distribution_mean).of(distribution_mean)
 
-        sample_variance = samples.map{ |x| (x - sample_mean) **2 }.sum / num_samples.to_f
+        sample_variance = samples.map{ |x| (x - sample_mean) **2 }.sum / (num_samples - 1).to_f
         distribution_variance = distribution.variance
         expect(sample_variance).to be_within(epsilon * distribution_variance).of(distribution_variance)
       end
