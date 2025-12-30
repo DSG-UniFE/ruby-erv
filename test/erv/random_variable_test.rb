@@ -1,19 +1,13 @@
-require 'test_helper'
-
-require 'erv/random_variable'
-
 describe ERV::SequentialRandomVariable do
 
   it 'should require the :first_value parameter' do
-    lambda do
-      ERV::SequentialRandomVariable.new
-    end.must_raise ArgumentError
+    expect{ ERV::SequentialRandomVariable.new }.to raise_exception(ArgumentError)
   end
 
   it 'should consider starting value' do
     first = 1.0
     srv = ERV::SequentialRandomVariable.new(first_value: first, distribution: :exponential, args: { rate: 2.0 })
-    srv.next.must_be :>, first
+    expect(srv.next).to (be > first)
   end
 
   it 'should consider previous sample' do
@@ -22,7 +16,7 @@ describe ERV::SequentialRandomVariable do
     previous_sample = srv.next
     10.times do
       new_sample = srv.next
-      new_sample.must_be :>, previous_sample
+      expect(new_sample).to (be > previous_sample)
       previous_sample = new_sample
     end
   end
