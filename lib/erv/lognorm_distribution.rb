@@ -1,7 +1,7 @@
 require 'erv/distribution'
 
 module ERV
-  class LogNormDistribution < Distribution
+  class LognormDistribution < Distribution
     def initialize(opts = {})
       super(opts)
 

@@ -11,6 +11,8 @@ module ERV
       # Parameters alpha and beta must be greater than zero
       @alpha = opts[:alpha]
       @beta = opts[:beta]
+      @loc = opts[:loc] || 0.0
+      @scale = opts[:scale] || 1.0
 
       @gamma_alpha = GammaDistribution.new(shape: @alpha, scale: 1.0)
       @gamma_beta  = GammaDistribution.new(shape: @beta, scale: 1.0)
@@ -22,15 +24,16 @@ module ERV
       # let's use gamma random variables
       x = @gamma_alpha.sample
       y = @gamma_beta.sample
-      x / (x + y)
+      @loc + x / (x + y) * @scale
     end
 
     def mean
-      @alpha.to_f / (@alpha + @beta)
+      @loc + @alpha.to_f / (@alpha + @beta) * @scale
     end
 
     def variance
-      (@alpha.to_f * @beta) / (((@alpha + @beta)**2) * (@alpha + @beta + 1))
+      core_var = (@alpha.to_f * @beta) / (((@alpha + @beta)**2) * (@alpha + @beta + 1))
+      core_var * (@scale**2)
     end
   end
 end
