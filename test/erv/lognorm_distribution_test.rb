@@ -1,12 +1,12 @@
 require 'erv/distribution_behaviour'
 
-describe ERV::LogNormDistribution do
+describe ERV::LognormDistribution do
   it 'should require the mu and sigma parameters' do
-    expect{ ERV::LogNormDistribution.new }.to raise_exception(ArgumentError)
+    expect { ERV::LognormDistribution.new }.to raise_exception(ArgumentError)
   end
 
   with 'sampling' do
-    let(:distribution) { ERV::LogNormDistribution.new(mu: 0.0, sigma: 0.25) }
+    let(:distribution) { ERV::LognormDistribution.new(mu: 0.0, sigma: 0.25) }
 
     let(:num_samples) { 200_000 }
     let(:samples) { num_samples.times.map { distribution.sample } }
